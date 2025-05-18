@@ -5,6 +5,13 @@
 <style>
   body {
     font-family: sans-serif;
+    background-image: url('Donate.jpg');
+    background-size: 40%; /* Reduced to 40% */
+    background-position: center 20%; /* Adjusted vertical position to move it down */
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+    background-color: black;
   }
   #payment-section {
     display: none;
@@ -15,6 +22,8 @@
     width: 500px;
     margin-left: auto;
     margin-right: auto;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
   .form-group {
     margin-bottom: 15px;
@@ -94,8 +103,8 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    background-image: linear-gradient(to right, #ff0000, #00ff00, #0000ff); /* Multi-color gradient */
-    animation: colorShift 5s infinite alternate; /* Adjust timing as needed */
+    background-image: linear-gradient(to right, #ff0000, #00ff00, #0000ff);
+    animation: colorShift 5s infinite alternate;
     margin-left: auto;
     margin-right: auto;
     display: block;
@@ -147,14 +156,15 @@
     color: white;
   }
   #confetti-container {
+    display: none;
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 33%; /* Confetti in bottom third of page */
+    height: 33%;
     pointer-events: none;
     overflow: hidden;
-    z-index: 1000; /* Ensure confetti is above other elements */
+    z-index: 1000;
   }
   .confetti {
     width: 10px;
@@ -220,10 +230,7 @@
       event.preventDefault();
       document.getElementById('payment-section').style.display = 'block';
       this.style.display = 'none';
-      startConfetti(); // Start confetti on Donate button click
     });
-
-
 
     const donationButtons = document.querySelectorAll('.donation-button');
     const donationAmountInput = document.getElementById('donation-amount');
@@ -245,7 +252,6 @@
       const errorMessage = document.getElementById('error-message');
       let hasErrors = false;
 
-      // Reset error styles
       cardholderInput.classList.remove('error');
       cardNumberInput.classList.remove('error');
       expiryInput.classList.remove('error');
@@ -282,60 +288,12 @@
 
       errorMessage.style.display = 'none';
       document.getElementById('fake-confirmation').style.display = 'block';
-      startConfetti(); // Start confetti on form submission
     }
 
     const cookieSection = document.getElementById('cookie-section');
     const confettiContainer = document.getElementById('confetti-container');
     const donateButton = document.getElementById('donate-button');
-
-    function createConfetti() {
-      for (let i = 0; i < 100; i++) {
-        const confetti = document.createElement('div');
-        confetti.classList.add('confetti');
-        confetti.style.left = `${Math.random() * 100}%`;
-        confetti.style.top = `${Math.random() * 100}%`;
-        const colors = ['#ff0000', '#00ff00', '#0000ff']; // Red, Green, Blue
-        confetti.style.backgroundColor = colors[i % colors.length];
-        confetti.style.animationDuration = `${Math.random() * 2 + 1}s`;
-        confetti.style.opacity = 0;
-        confettiContainer.appendChild(confetti);
-
-        setTimeout(() => {
-          confetti.style.opacity = 1;
-          confetti.style.transform = `translateY(${window.innerHeight * 0.3}px) rotate(${Math.random() * 360}deg)`;
-        }, 10);
-      }
-    }
-
-    function removeConfetti() {
-      confettiContainer.innerHTML = '';
-    }
-
-    function handleCookieAccept() {
-      startConfetti(); // Start confetti on cookie accept
-      cookieSection.style.backgroundColor = 'transparent';
-      cookieSection.style.color = 'transparent';
-      setTimeout(() => {
-        confettiContainer.style.opacity = 0;
-        setTimeout(removeConfetti, 1000);
-        cookieSection.style.display = 'none';
-      }, 3000);
-    }
-
-    function startConfetti() {
-      confettiContainer.style.opacity = 1;
-      createConfetti();
-       setTimeout(() => {
-        confettiContainer.style.opacity = 0;
-        setTimeout(removeConfetti, 1000);
-    }, 3000);
-    }
-
-    document.querySelector('.accept-necessary').addEventListener('click', handleCookieAccept);
-    document.querySelector('.accept-all').addEventListener('click', handleCookieAccept);
   </script>
-
 </body>
 </html>
 
